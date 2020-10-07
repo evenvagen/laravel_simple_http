@@ -9,7 +9,15 @@ class ProductController extends Controller
 {
     public function index(){
         $product = Http::withBasicAuth(env('API_USERNAME'), env('API_PASSWORD'))
-        ->get('https://aksel.frb.io/wp-json/wc/v3/products');
+        ->get('https://aksel.frb.io/wp-json/wc/v3/products/')->json();
+
+        return $product;
+    }
+
+    public function showProduct($id){
+
+        $product = Http::withBasicAuth(env('API_USERNAME'), env('API_PASSWORD'))
+        ->get('https://aksel.frb.io/wp-json/wc/v3/products/'.$id)->json();
 
         return $product;
     }
