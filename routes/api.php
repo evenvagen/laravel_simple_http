@@ -22,11 +22,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //Product
-Route::get('product', [ProductController::class, 'showProducts']);
-Route::get('product/{id}', [ProductController::class, 'showProduct']);
+Route::get('product', [ProductController::class, 'showProducts'])->name('bolle');
+// Route::get('product/{id?}', [ProductController::class, 'showProduct'])->name('home');
 Route::get('product/slug/{name}', [ProductController::class, 'getSlug']);
-Route::get('product/attributes', [ProductController::class, 'showProductAttributes']);
-Route::get('product/attributes/{id}/terms', [ProductController::class, 'showProductAttributesTerms']);
+// Route::get('product/attributes', [ProductController::class, 'showProductAttributes']);
+Route::get('product/attributes/{id?}/terms', [ProductController::class, 'showProductAttributesTerms']);
+Route::redirect('', 'product');
+Route::redirect('/test', 'product');
 
 //Customer
 Route::get('customer', [CustomerController::class, 'index']);
@@ -34,3 +36,8 @@ Route::get('customer', [CustomerController::class, 'index']);
 //Order
 Route::get('order', [OrderController::class, 'index']);
 Route::get('order/{id}', [OrderController::class, 'show']);
+
+
+Route::fallback(function () {
+    return redirect()->route('bolle');
+});

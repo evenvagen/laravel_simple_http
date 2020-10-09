@@ -14,7 +14,7 @@ class ProductController extends Controller
         return $product;
     }
 
-    public function showProduct($name){
+    public function showProduct($name = null){
 
         $product = Http::withBasicAuth(env('API_USERNAME'), env('API_PASSWORD'))
         ->get('https://aksel.frb.io/wp-json/wc/v3/products/'.$name)->json();
@@ -22,9 +22,9 @@ class ProductController extends Controller
         return $product;
     }
 
-    public function getSlug($id){
+    public function getSlug($slug){
         $product = Http::withBasicAuth(env('API_USERNAME'), env('API_PASSWORD'))
-        ->get('https://aksel.frb.io/wp-json/wc/v3/products?slug='.$id)->json();
+        ->get('https://aksel.frb.io/wp-json/wc/v3/products?slug='.$slug)->json();
 
         return $product;
     }
@@ -36,7 +36,7 @@ class ProductController extends Controller
     return $productAttributes;
     }
 
-    public function showProductAttributesTerms($id){
+    public function showProductAttributesTerms($id = null){
         $AttributesTerms = Http::withBasicAuth(
             env('API_USERNAME'),
             env('API_PASSWORD')
